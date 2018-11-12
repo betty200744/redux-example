@@ -17,6 +17,13 @@ const mapDispatchToProps = (dispatch) => {
 const Counter = ({counter, dispatch}) => {
   return (
     <div>
+      <li
+        style={{
+          textDecoration: 'line-through'
+        }}
+      >
+       this is line-through
+      </li>
       Clicked times: {counter}
       <button id="increase" onClick={ () => dispatch('increase')}>+</button>
       <button id="decrease" onClick={ () => dispatch('decrease')}>-</button>
