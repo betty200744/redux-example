@@ -1,35 +1,27 @@
 
-import React, {Component} from 'react';
-import PropTypes from 'prop-types'
+import React from 'react';
+import {connect} from 'react-redux'
 
-class Counter extends Component{
-  constructor(props){
-    super(props);
-    this.asyncIncrease = this.asyncIncrease.bind(this);
-  }
 
-  asyncIncrease() {
-    setTimeout(this.props.increase, 1000)
-  }
-
-  render(){
-    const {state, increase, decrease} = this.props;
-    return (
-      <div>
-        Clicked times: {state}
-        <button id="increase" onClick={increase}>+</button>
-        <button id="decrease" onClick={decrease}>-</button>
-        <button id="async" onClick={this.asyncIncrease}>async+</button>
-      </div>
-    )
-  }
-}
-
-Counter.propTypes = {
-  state: PropTypes.number.isRequired,
-  increase: PropTypes.func.isRequired,
-  decrease: PropTypes.func.isRequired,
+const mapStateToProps = (state) => {
+  const {counter} = state;
+  return {counter};
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: (action) => dispatch({type: action})
+  }
+};
 
-export default Counter;
+const Counter = ({counter, dispatch}) => {
+  return (
+    <div>
+      Clicked times: {counter}
+      <button id="increase" onClick={ () => dispatch('increase')}>+</button>
+      <button id="decrease" onClick={ () => dispatch('decrease')}>-</button>
+    </div>
+  )
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

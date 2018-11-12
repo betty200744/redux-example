@@ -12,25 +12,11 @@ import reducer from './reducer';
 const rootElement = document.getElementById('root');
 const store = createStore(reducer);
 
-const render = () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <Counter
-        state={store.getState().counter}
-        increase={() => {
-          return store.dispatch({type: 'increase'})
-        }}
-        decrease={() => {
-          return store.dispatch({type: 'decrease'})
-        }}
-      />
-    </Provider>
-    , rootElement);
-
-};
-
-render();
-store.subscribe(render);
+ReactDOM.render(
+  <Provider store={store}>
+    <Counter/>
+  </Provider>
+  , rootElement);
 
 
 
